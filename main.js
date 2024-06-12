@@ -1,82 +1,52 @@
+// Telegram Bot tokeningizni va chat ID'nizni kiriting
+const BOT_TOKEN = '7009428471:AAHmS6Ju6tIbM3YDI1WreCCG-pY89KVnZEk';
+const CHAT_ID = '1381579135';
+// Telegram'ga xabar yuborish funksiyasi
+const sendMessageToTelegram = async (message) => {
+    try {
+        const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: message
+            })
+        });
 
-//jQuery time
-var current_fs, next_fs, previous_fs; //fieldsets
-var left, opacity, scale; //fieldset properties which we will animate
-var animating; //flag to prevent quick multi-click glitches
+        const data = await response.json();
+        return data.ok;
+    } catch (error) {
+        console.error('Telegramga yuborishda xatolik:', error);
+        return false;
+    }
+};
 
-$(".next").click(function () {
-    if (animating) return false;
-    animating = true;
+// Formani yuborish funksiyasi
+const handleSubmit = async (event) => {
+    event.preventDefault();
 
-    current_fs = $(this).parent();
-    next_fs = $(this).parent().next();
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const phone = document.getElementById('phone').value;
+    const messageText = document.getElementById('message').value;
 
-    //activate next step on progressbar using the index of next_fs
-    $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+    const message = `
+    Ism: ${firstName}
+    Familiya: ${lastName}
+    Telefon raqam: ${phone}
+    Xabar: ${messageText}
+  `;
 
-    //show the next fieldset
-    next_fs.show();
-    //hide the current fieldset with style
-    current_fs.animate({ opacity: 0 }, {
-        step: function (now, mx) {
-            //as the opacity of current_fs reduces to 0 - stored in "now"
-            //1. scale current_fs down to 80%
-            scale = 1 - (1 - now) * 0.2;
-            //2. bring next_fs from the right(50%)
-            left = (now * 50) + "%";
-            //3. increase opacity of next_fs to 1 as it moves in
-            opacity = 1 - now;
-            current_fs.css({
-                'transform': 'scale(' + scale + ')',
-                'position': 'absolute'
-            });
-            next_fs.css({ 'left': left, 'opacity': opacity });
-        },
-        duration: 800,
-        complete: function () {
-            current_fs.hide();
-            animating = false;
-        },
-        //this comes from the custom easing plugin
-        easing: 'easeInOutBack'
-    });
-});
+  console.log(message);
+    const success = await sendMessageToTelegram(message);
+    if (success) {
+        alert('Xabar muvaffaqiyatli yuborildi');
+    } else {
+        alert('Xabar yuborishda xatolik yuz berdi');
+    }
+};
 
-$(".previous").click(function () {
-    if (animating) return false;
-    animating = true;
-
-    current_fs = $(this).parent();
-    previous_fs = $(this).parent().prev();
-
-    //de-activate current step on progressbar
-    $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-
-    //show the previous fieldset
-    previous_fs.show();
-    //hide the current fieldset with style
-    current_fs.animate({ opacity: 0 }, {
-        step: function (now, mx) {
-            //as the opacity of current_fs reduces to 0 - stored in "now"
-            //1. scale previous_fs from 80% to 100%
-            scale = 0.8 + (1 - now) * 0.2;
-            //2. take current_fs to the right(50%) - from 0%
-            left = ((1 - now) * 50) + "%";
-            //3. increase opacity of previous_fs to 1 as it moves in
-            opacity = 1 - now;
-            current_fs.css({ 'left': left });
-            previous_fs.css({ 'transform': 'scale(' + scale + ')', 'opacity': opacity });
-        },
-        duration: 800,
-        complete: function () {
-            current_fs.hide();
-            animating = false;
-        },
-        //this comes from the custom easing plugin
-        easing: 'easeInOutBack'
-    });
-});
-
-$(".submit").click(function () {
-    return false;
-})
+// Event listener qo'shish
+document.getElementById('registerForm').addEventListener('submit', handleSubmit);
