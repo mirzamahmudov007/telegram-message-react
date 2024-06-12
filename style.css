@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
 /* =====================================
 Template Name: 	Mediplus.
 Author Name: Naimur Rahman
@@ -53,6 +55,10 @@ body{
 	font-weight: 400;
 	font-size:14px;
 	color:#888;
+}
+
+*{
+	  font-family: "Karla", sans-serif;
 }
 .pro-features {
 	position: fixed;
