@@ -32,8 +32,7 @@ const handleSubmit = async (event) => {
     const phone = document.getElementById('phone').value;
     const messageText = document.getElementById('message').value;
 
-    const message = `
-    Ism: ${firstName}
+    const message = `Ism: ${firstName}
     Familiya: ${lastName}
     Telefon raqam: ${phone}
     Xabar: ${messageText}
