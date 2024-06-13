@@ -4209,12 +4209,12 @@ body{
             padding-bottom: 16px;
         }
         .label i, .label .title {
-            color: green;
+            color: black;
             transition: 200ms color;
         }
         .label:hover {
             border: 2px solid black;
         }
         .label:hover i, .label:hover .title {
-            color: green;
+            color: black;
         }
