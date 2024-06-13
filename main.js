@@ -466,7 +466,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (event) =
             // Reset progress bar after completion
             progressBar.style.width = '0%';
             progressBar.innerText = '0%';
-            submitButtonText.style.color = ''; // Show button text after completion
+            submitButtonText.style.color = 'white'; // Show button text after completion
         };
 
         xhr.onerror = () => {
@@ -474,7 +474,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (event) =
             // Reset progress bar in case of error
             progressBar.style.width = '0%';
             progressBar.innerText = '0%';
-            submitButtonText.style.color = ''; // Show button text after error
+            submitButtonText.style.color = 'white'; // Show button text after error
         };
 
         xhr.send(formData);
