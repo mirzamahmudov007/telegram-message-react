@@ -4218,12 +4218,12 @@ body{
         .label:hover i, .label:hover .title {
             color: black;
         }
-
+/* 
 
 	#progressContainer {
     width: 100%;
     background-color: #f3f3f3;
-    display: none; /* Initially hidden */
+    display: none; 
     position: fixed;
     top: 0;
     left: 0;
@@ -4237,4 +4237,31 @@ body{
     text-align: center;
     line-height: 30px;
     color: white;
+} */
+
+#submitButton {
+    position: relative;
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+}
+
+#progressBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: rgba(0, 128, 0, 0.6);
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    z-index: 1;
+    transition: width 0.4s ease;
+}
+
+#submitButtonText {
+    position: relative;
+    z-index: 2;
 }
