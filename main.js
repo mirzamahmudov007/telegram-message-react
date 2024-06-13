@@ -145,18 +145,18 @@ document.getElementById('uploadForm').addEventListener('submit', async (event) =
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok.');
+            throw new Error("Yuborishda xatolik yuz berdi. Iltimos keyinroq qayta urinib ko'ring");
         }
 
         const result = await response.json();
 
         if (result.ok) {
-            alert('File successfully sent to Telegram.');
+            alert('Muvaffaqiyatli yuborildi');
         } else {
-            alert('Error sending file to Telegram.');
+            alert('Yuborishda xatolik yuz berdi');
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('Error sending file to Telegram. Please try again later.');
+        alert("Yuborishda xatolik yuz berdi. Iltimos keyinroq qayta urinib ko'ring.");
     }
 });
