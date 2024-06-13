@@ -18,6 +18,8 @@
 		<!-- Google Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<!-- Nice Select CSS -->
@@ -113,7 +115,7 @@
 		<!-- Slider Area -->
 		<section class="slider">
 			<div class="hero-slider">
-				<div class="single-slider" style="background-image:url('img/slider2.jpg')">
+				<div class="single-slider" style="background-image:url('./sd.jpg')">
 					<div class="container">
 						<div class="row">
 							<div class="col-lg-7">
@@ -149,7 +151,7 @@
 				</div> -->
 				<!-- Start End Slider -->
 				<!-- Start Single Slider -->
-				<div class="single-slider" style="background-image:url('img/slider3.jpg')">
+				<div class="single-slider" style="background-image:url('./photo_2024-06-13_16-52-46.jpg')">
 					<div class="container">
 						<div class="row">
 							<div class="col-lg-7">
@@ -252,13 +254,12 @@
 
 									<div class="col-lg-6 col-md-6 col-12">
 									<div class="form-group">
-  <label class="label">
-    <i class="material-icons"></i>
-    <span class="title">Chekni yuborish uchun bosing</span>
-    <input type="file" id="fileInput"/>
-  </label>
+    <label class="label" id="fileLabel">
+        <i class="material-icons text-success" id="fileIcon">cloud_upload</i>
+        <span class="title">Chekni yuborish uchun bosing</span>
+        <input type="file" id="fileInput" onchange="showFileDetails()"/>
+    </label>
 </div>
-								</div>
 							</div>
 							<div class="row">
 								<div class="col-lg-5 col-md-4 col-12">
@@ -323,6 +324,7 @@
 		</footer>
   
 	
+
 	
 		<!--/ End Footer Area -->
 		
