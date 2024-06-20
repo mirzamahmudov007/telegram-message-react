@@ -10,78 +10,35 @@ document.getElementById('uploadForm').addEventListener('submit', async (event) =
     const file = fileInput.files[0];
 
     if (!file) {
-        alert('Please select a file.');
         return;
     }
-
-    // Show the progress bar inside the submit button
-    const progressBar = document.getElementById('progressBar');
-    const submitButtonText = document.getElementById('submitButtonText');
 
     const formData = new FormData();
     formData.append('document', file);
     formData.append('caption', `Ism: ${firstName}\nFamiliya: ${lastName}\nTelefon: ${phone}\nShikoyat: ${caption}`);
     const token = '7009428471:AAHmS6Ju6tIbM3YDI1WreCCG-pY89KVnZEk';
-    const chatId = '3939294';
+    const chatId = '1381579135';
 
-  
     const url = `https://api.telegram.org/bot${token}/sendDocument?chat_id=${chatId}`;
 
-
-   
     try {
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', url, true);
+        const response = await fetch(url, {
+            method: 'POST',
+            body: formData
+        });
 
-        xhr.upload.onprogress = (event) => {
-            if (event.lengthComputable) {
-                const percentComplete = (event.loaded / event.total) * 100;
-                progressBar.style.width = percentComplete + '%';
-                progressBar.innerText = Math.floor(percentComplete) + '%';
-                submitButtonText.style.color = 'transparent'; // Hide button text during progress
-            }
-        };
-
-        xhr.onload = () => {
-            if (xhr.status === 200) {
-                const result = JSON.parse(xhr.responseText);
-                if (result.ok) {
-
-                    alert('Muvaffaqiyatli yuborildi');
-                    fileInput.value = null;
-                    console.log(fileInput.value);
-                } else {
-                    alert('Yuborishda xatolik yuz berdi');
-                }
+        if (response.ok) {
+            const result = await response.json();
+            if (result.ok) {
+                fileInput.value = null;
+                console.log(fileInput.value);
             } else {
-                alert('Yuborishda xatolik yuz berdi');
             }
-            // Reset progress bar after completion
-            progressBar.style.width = '0%';
-            progressBar.innerText = '0%';
-            submitButtonText.style.color = 'white'; // Show button text after completion
-        };
-
-        xhr.onerror = () => {
-            alert("Yuborishda xatolik yuz berdi. Iltimos keyinroq qayta urinib ko'ring.");
-            // Reset progress bar in case of error
-            progressBar.style.width = '0%';
-            progressBar.innerText = '0%';
-            submitButtonText.style.color = 'white'; // Show button text after error
-        };
-
-        xhr.send(formData);
-
+        } else {
+        }
     } catch (error) {
-        console.error('Error:', error);
-        alert("Yuborishda xatolik yuz berdi. Iltimos keyinroq qayta urinib ko'ring.");
-        // Reset progress bar in case of error
-        progressBar.style.width = '0%';
-        progressBar.innerText = '0%';
-        submitButtonText.style.color = ''; // Show button text after error
     }
 });
-
 
 function showFileDetails() {
     const input = document.getElementById('fileInput');
